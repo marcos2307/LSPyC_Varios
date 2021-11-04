@@ -58,14 +58,18 @@ for k=1:length(d)
     NN = {f, MSE, THDref, THDout};
     M{k,:}= NN;
 %% descomentar para ver las señales
-%     figure(k)
-%     plot(time,ref);
-%     hold on
-%     plot(time,out);
-%     hold off
-%     pause(10)
-%     close
-
+    figure(k)
+    plot(time,ref);
+    hold on
+    plot(time,out);
+    hold off
+    pause(5)
+    close
+    snr(ref, 1/(time(2)-time(1)))
+    pause(5)
+    close
+    snr(out, 1/(time(2)-time(1)))
+    pause(5)
 end
 
 o = strcat(path_out, 'resultado.csv');
