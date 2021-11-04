@@ -49,13 +49,22 @@ for k=1:length(d)
 % thd de matlab
     [thd_ref_db,harmpow_ref,harmfreq_ref] = thd(ref,1/(time(2)-time(1)),10);
     [thd_out_db,harmpow_out,harmfreq_out] = thd(out,1/(time(2)-time(1)),10);
-    Tref = table(harmfreq_ref,harmpow_ref,'VariableNames',{'Frequency','Power'}) %100*(10.^(harmpow_ref/20))
-    Tout = table(harmfreq_out,harmpow_out,'VariableNames',{'Frequency','Power'}) %100*(10.^(harmpow_out/20))
+    
+
+    Tref = table(harmfreq_ref,100*(10.^(harmpow_ref/20))/(10.^(harmpow_ref(1)/20)),'VariableNames',{'Frequency','Power'}) 
+    Tout = table(harmfreq_out,100*(10.^(harmpow_out/20))/(10.^(harmpow_out(1)/20)),'VariableNames',{'Frequency','Power'}) 
     THDref = 100*(10^(thd_ref_db/20))
     THDout = 100*(10^(thd_out_db/20))
     NN = {f, MSE, THDref, THDout};
     M{k,:}= NN;
-    
+%% descomentar para ver las señales
+%     figure(k)
+%     plot(time,ref);
+%     hold on
+%     plot(time,out);
+%     hold off
+%     pause(10)
+%     close
 
 end
 
