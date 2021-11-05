@@ -24,27 +24,23 @@ for k=1:length(d)
     %ref = str2double(ref);
     %out = str2double(out);
 
-    %MSE
-    MSE = sum((ref-out).^2)/25000
 
-    %THD de osvaldo
-%     B0 = mean(out);  % Vertical shift
-%     B1 = (max(out) - min(out))/2; % Amplitude
-%     B2 = 2*pi*50; % Phase (Number of peaks)
-%     B3 = pi/2; % Phase shift (eyeball the Curve)
-%     myFit = NonLinearModel.fit(time,out, 'y ~ b0 + b1*sin(b2*x1 + b3)', [B0, B1, B2, B3]);
-%     hold on
-%     plot(time, myFit.Fitted);
-%     hold off
-%     %ventana
-%     first = find(time==0.12, 1, 'first');
-%     last = find(time==0.12, 1, 'first');
-% 
-%     Amedrms=rms(out(first:last));
-%     Arefrms=rms(ref(first:last));  %(first_max:last_max) si se usa ventana
+
+    %Ajuste de curva
+    B0 = mean(out);  % Vertical shift
+    B1 = (max(out) - min(out))/2; % Amplitude
+    B2 = 2*pi*50; % Phase (Number of peaks)
+    B3 = pi/2; % Phase shift (eyeball the Curve)
+    myFit = NonLinearModel.fit(time,out, 'y ~ b0 + b1*sin(b2*x1 + b3)', [B0, B1, B2, B3]);
+    hold on
+    plot(time, myFit.Fitted);
+    hold off
+
+    
+    %MSE
+    MSE = myFit.RMSE
 %     A1rms=table2array(myFit.Coefficients(2,1))/sqrt(2);
-%     Adisrms=sqrt((abs(Amedrms^2-Arefrms^2)));
-%     THDref=Adisrms/A1rms*100
+
     
 % thd de matlab
     [thd_ref_db,harmpow_ref,harmfreq_ref] = thd(ref,1/(time(2)-time(1)),10);
