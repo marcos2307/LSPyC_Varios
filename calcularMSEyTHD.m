@@ -1,7 +1,6 @@
 %% calcula el THD y error cuadratico medio de un CSV generado por el osciloscopio
 %% se creo para datos el convertidor matricial y lee tiempo, ref de corriente,
 %% y corriente.
-
 clear all;
 clc;
 % abre archivo
@@ -31,16 +30,23 @@ for k=1:length(d)
     B1 = (max(out) - min(out))/2; % Amplitude
     B2 = 2*pi*50; % Phase (Number of peaks)
     B3 = pi/2; % Phase shift (eyeball the Curve)
-    myFit = NonLinearModel.fit(time,out, 'y ~ b0 + b1*sin(b2*x1 + b3)', [B0, B1, B2, B3]);
-    hold on
-    plot(time, myFit.Fitted);
-    hold off
-
     
-    %MSE
-    MSE = myFit.RMSE
-%     A1rms=table2array(myFit.Coefficients(2,1))/sqrt(2);
-
+    %se calculan los modelos de la referencia y la salida para obtener el
+    %offset
+    refFit = NonLinearModel.fit(time,ref, 'y ~ b0 + b1*sin(b2*x1 + b3)', [B0, B1, B2, B3]);
+    outFit = NonLinearModel.fit(time,out, 'y ~ b0 + b1*sin(b2*x1 + b3)', [B0, B1, B2, B3]);
+    
+    %se obtienen los offsets
+    offOut = table2array(outFit.Coefficients(1,1))
+    offRef = table2array(refFit.Coefficients(1,1))
+    
+    %se elimina la componente DC
+    ref = ref-offRef;
+    out = out-offOut;
+    
+    %se calcula el MSE
+    MSE = sum((ref-out).^2)/25000
+    
     
 % thd de matlab
     [thd_ref_db,harmpow_ref,harmfreq_ref] = thd(ref,1/(time(2)-time(1)),10);
@@ -51,21 +57,21 @@ for k=1:length(d)
     Tout = table(harmfreq_out,100*(10.^(harmpow_out/20))/(10.^(harmpow_out(1)/20)),'VariableNames',{'Frequency','Power'}) 
     THDref = 100*(10^(thd_ref_db/20))
     THDout = 100*(10^(thd_out_db/20))
-    NN = {f, MSE, THDref, THDout};
+    NN = {f, THDref, THDout, refFit.Coefficients, outFit.Coefficients, MSE};
     M{k,:}= NN;
 %% descomentar para ver las señales
-    figure(k)
-    plot(time,ref);
-    hold on
-    plot(time,out);
-    hold off
-    pause(5)
-    close
-    snr(ref, 1/(time(2)-time(1)))
-    pause(5)
-    close
-    snr(out, 1/(time(2)-time(1)))
-    pause(5)
+%     figure(k)
+%     plot(time,ref);
+%     hold on
+%     plot(time,out);
+%     hold off
+%     pause(5)
+%     close
+%     snr(ref, 1/(time(2)-time(1)))
+%     pause(5)
+%     close
+%     snr(out, 1/(time(2)-time(1)))
+%     pause(5)
 end
 
 o = strcat(path_out, 'resultado.csv');
