@@ -4,15 +4,16 @@
 clear all;
 clc;
 % abre archivo
-path_dir='C:\Datos\Resultados M-MMC mejorado\';
-d = dir('C:\Datos\Resultados M-MMC mejorado\**\*.CSV');
+path_dir='C:\Datos\Resultados M-MMC mejorado\Independiente_2\40kHz\40kHz_4A\';
+d = dir('C:\Datos\Resultados M-MMC mejorado\Independiente_2\40kHz\40kHz_4A\*008.CSV');
 path_out = 'C:\Resultados\';
 
 
 for k=1:length(d)
     f = strcat(d(k).folder,'\',d(k).name)
     T = readtable(f);
-    
+   
+
     
     % extrae mediciones de tiempo, referencia y salida
     time = table2array(T(17:25016, 1));
@@ -23,7 +24,13 @@ for k=1:length(d)
     %ref = str2double(ref);
     %out = str2double(out);
 
-
+%     figure(1)
+%     plot(time,ref);
+%     hold on
+%     plot(time,out);
+%     hold off
+%     pause(5)
+%     close
 
     %Ajuste de curva
     B0 = mean(out);  % Vertical shift
@@ -53,13 +60,13 @@ for k=1:length(d)
     [thd_out_db,harmpow_out,harmfreq_out] = thd(out,1/(time(2)-time(1)),10);
     
 
-    Tref = table(harmfreq_ref,100*(10.^(harmpow_ref/20))/(10.^(harmpow_ref(1)/20)),'VariableNames',{'Frequency','Power'}) 
-    Tout = table(harmfreq_out,100*(10.^(harmpow_out/20))/(10.^(harmpow_out(1)/20)),'VariableNames',{'Frequency','Power'}) 
+    Tref = table(harmfreq_ref,harmpow_ref,'VariableNames',{'Frequency','Power'}) 
+    Tout = table(harmfreq_out,harmpow_out,'VariableNames',{'Frequency','Power'}) 
     THDref = 100*(10^(thd_ref_db/20))
     THDout = 100*(10^(thd_out_db/20))
     NN = {f, THDref, THDout, refFit.Coefficients, outFit.Coefficients, MSE};
     M{k,:}= NN;
-%% descomentar para ver las señales
+% %% descomentar para ver las señales
 %     figure(k)
 %     plot(time,ref);
 %     hold on
