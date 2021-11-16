@@ -17,3 +17,8 @@ Archivos varios que se desarrollan para el LSPyC
     salida.
     En el script también se realizan gráficos, se muestran mas detalles de los cálculos y se calcula SNR 
     (se mantiene en alrededor de 40db para ref y 20db para out en este caso).
+# 2. realizarTestEstadistico.m 
+    Utiliza la función swtest.m encontrada en mathworks para verificar si las mediciones de THD tienen
+    distribucion normal. (se realiza un solo caso 10K-10A)
+    Se utiliza ttest2 para el test de student de muestras independientes para comparar el caso Acoplado y
+    el caso Independiente.
