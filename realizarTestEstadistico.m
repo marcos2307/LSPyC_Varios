@@ -1,18 +1,11 @@
-clear all
-%tabla con datos
-f = 'resultadoExcel.xls';
-T = readtable(f);
-
-%datos a evaluar de la tabla, especificar las filas y columnnas del excel
-%10K 10A
-X = table2array(T(2:7, 3));
-Y = table2array(T(98:103, 3));
+function [h] = realizarTestEstadistico(X,Y)
 ALPHA = 0.05;
 [HX_noesnormal, pValue, SWstatistic] = swtest(X, ALPHA)
 [HY_noesnormal, pValue, SWstatistic] = swtest(Y, ALPHA)
 
 if HX_noesnormal | HY_noesnormal
    disp("se rechaza la hipotesis nula de que X e Y tienen distribuciones normales");
+   h=999;
 else
     caso1 = [X ones(size(X))];
     caso2 = [Y 2*ones(size(Y))];
@@ -32,4 +25,5 @@ else
            disp('No se puede descartar la H0 de que son iguales')
        end
     end
+end
 end

@@ -4,8 +4,7 @@
 clear all;
 clc;
 % abre archivo
-path_dir='C:\Datos\Resultados M-MMC mejorado\Independiente_2\40kHz\40kHz_4A\';
-d = dir('C:\Datos\Resultados M-MMC mejorado\Independiente_2\40kHz\40kHz_4A\*008.CSV');
+d = dir('C:\Datos\Resultados M-MMC mejorado2\**\*.CSV');
 path_out = 'C:\Resultados\';
 
 
