@@ -1,0 +1,15 @@
+[System]
+Version=2.2
+SystemType=SingleProcessorSystem
+DAQService=DsDAQ
+DsDAQBackground=1
+Status=Start
+File=mgmono.rta
+RTP=Master
+
+[Master]
+Type=DS1202
+State=Enabled
+ServiceID=1
+TraceFile=mgmono.trc
+ID=F2D152CB-11FC-4B1C-9802-E5E69DC8AE0B

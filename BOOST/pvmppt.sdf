@@ -1,0 +1,15 @@
+[System]
+Version=2.2
+SystemType=SingleProcessorSystem
+DAQService=DsDAQ
+DsDAQBackground=1
+Status=Start
+File=pvmppt.rta
+RTP=Master
+
+[Master]
+Type=DS1202
+State=Enabled
+ServiceID=1
+TraceFile=pvmppt.trc
+ID=933AAE6A-6CC2-40E5-959C-25C7B2D587A2

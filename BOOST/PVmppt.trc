@@ -1,0 +1,1066 @@
+-- ****************************************************************************
+--
+--  Trace file: PVmppt.trc
+--
+--  RTI1202 7.13 (02-Nov-2019)
+--  Wed Aug 27 18:25:04 2025
+--
+--  Copyright 2025, dSPACE GmbH. All rights reserved.
+--
+-- ****************************************************************************
+--
+--  Used options:
+--    TRCGenerateVirtualBlocks      = 0
+--    TRCGenerateLabels             = 0
+--    TRCGenerateStates             = 0
+--    TRCGenerateDerivatives        = 0
+--    TRCGenerateParamValues        = 0
+--    TRCGenerateApplicationKeyword = 0
+--    TRCOnlyGlobals                = 0
+--    TRCIsOmitVdOn                 = 0
+--
+--  Trace file format: 3
+
+-- ******** Keywords **********************************************************
+-- _application "PVmppt.map"
+
+_genname     "RTI"
+_genversion  "7.13"
+_gendate     "08/27/2025 18:25:11"
+_description ""
+_author      "RTI1202 7.13 (02-Nov-2019)"
+_model       "PVmppt"
+
+-- Default data type formats
+_floating_point_type(64,IEEE)
+_integer_type(32)
+
+-- No Data Capture blocks within model: use base sample time as sampling period
+sampling_period[0]
+{
+  value:       5.0E-5
+  alias:       "HostService"
+  increment:   5.0E-5
+  unit:        "s"
+}
+
+
+
+-- Type definitions for structures
+
+struct PVmppt_struct_isB4Cw3Ovpp8VfzP6RUqbD
+{
+  array-incr: 4         
+}
+    structField0 
+    {
+      alias:   "OutputPortsWidth"
+      type:    int(32)
+      offs:    0
+    }
+endstruct
+
+
+-- ******** Simulation control variables **************************************
+
+finalTime
+{
+ type:  flt(64,IEEE)*
+ alias: "finalTime"
+ desc:  "Simulation stop time. When reached, simState switches to STOP."
+ flags:  READONLY
+ unit:  "s"
+ addr:    0x48538754
+}
+
+currentTime
+{
+ type:  flt(64,IEEE)*
+ alias: "currentTime"
+ desc:  "Current simulation time. Increments with execution of Timer Task 1."
+ flags: READONLY
+ unit:  "s"
+ addr:    0x48538750
+}
+
+modelStepSize
+{
+ type:  flt(64,IEEE)
+ alias: "modelStepSize"
+ desc:  "Fixed step size of the model, sample time of Timer Task 1."
+ flags: READONLY
+ unit:  "s"
+ addr:    0x48538758
+}
+
+simState
+{
+ type:  int(32)
+ alias: "simState"
+ desc:  "Simulation state: STOP=0 RUN=2"
+ unit:  "-"
+ addr:    0x48045570
+}
+
+p_msg_last_error_no
+{
+ type:  uint(32)*
+ alias: "errorNumber"
+ desc:  "Error number of last error message (zero if no error)."
+ unit:  "-"
+ flags: READONLY
+ addr:    0x48043eb8
+}
+
+p_dsts_sum_of_reset_time
+{
+ type:  flt(64,IEEE)*
+ alias: "sumOfResetTime"
+ desc:  "Internal variable for summing up reset time."
+ unit:  "s"
+ flags: READONLY|HIDDEN
+ addr:    0x48043eb4
+}
+
+
+-- ******** Task Information variables ****************************************
+group "Task Info"
+{
+ 
+}
+  group "Timer Task 1"
+  {
+   
+  }
+
+  pRti_TIMERA_STime
+  {
+   type:  flt(64,IEEE)*
+   alias: "sampleTime"
+   flags: READONLY
+		 addr:    0x48538774
+		}
+  pRti_TIMERA_TTime
+  {
+   type:  flt(64,IEEE)*
+   alias: "turnaroundTime"
+   flags: READONLY
+ addr:    0x48538778
+}
+  pRti_TIMERA_TState
+  {
+   type:  int(32)*
+   alias: "state"
+   flags: READONLY
+		 addr:    0x4853877c
+		}
+  pRti_TIMERA_OType
+  {
+   type:  int(32)*
+   alias: "overrunCheckType"
+   flags: READONLY
+		 addr:    0x48538780
+		}
+  pRti_TIMERA_OMax
+  {
+   type:  int(32)*
+   alias: "overrunQueueMax"
+   flags: READONLY
+		 addr:    0x48538784
+		}
+  pRti_TIMERA_ORpt
+  {
+   type:  int(32)*
+   alias: "overrunQueueCount"
+   flags: READONLY
+		 addr:    0x48538788
+		}
+  pRti_TIMERA_OCnt
+  {
+   type:  int(32)*
+   alias: "overrunCount"
+   flags: READONLY
+ addr:    0x4853878c
+}
+  pRti_TIMERA_TCnt
+  {
+   type:  flt(64,IEEE)*
+   alias: "taskCallCount"
+   flags: READONLY
+ addr:    0x48538790
+}
+  pRti_TIMERA_Prio
+  {
+   type:  int(32)*
+   alias: "priority"
+   flags: READONLY
+		 addr:    0x48538794
+		}
+  endgroup
+
+  group "PROC_INT_BL1"
+  {
+   
+  }
+
+  pRti_FPGACL1FPGA_INTP0Ch0_TTime
+  {
+   type:  flt(64,IEEE)*
+   alias: "turnaroundTime"
+   flags: READONLY
+		 addr:    0x4853879c
+		}
+  pRti_FPGACL1FPGA_INTP0Ch0_TState
+  {
+   type:  int(32)*
+   alias: "state"
+   flags: READONLY
+ addr:    0x485387a0
+}
+  pRti_FPGACL1FPGA_INTP0Ch0_OType
+  {
+   type:  int(32)*
+   alias: "overrunCheckType"
+   flags: READONLY
+		 addr:    0x485387a4
+		}
+  pRti_FPGACL1FPGA_INTP0Ch0_OMax
+  {
+   type:  int(32)*
+   alias: "overrunQueueMax"
+   flags: READONLY
+		 addr:    0x485387a8
+		}
+  pRti_FPGACL1FPGA_INTP0Ch0_ORpt
+  {
+   type:  int(32)*
+   alias: "overrunQueueCount"
+   flags: READONLY
+		 addr:    0x485387ac
+		}
+  pRti_FPGACL1FPGA_INTP0Ch0_OCnt
+  {
+   type:  int(32)*
+   alias: "overrunCount"
+   flags: READONLY
+		 addr:    0x485387b0
+		}
+  pRti_FPGACL1FPGA_INTP0Ch0_TCnt
+  {
+   type:  flt(64,IEEE)*
+   alias: "taskCallCount"
+   flags: READONLY
+ addr:    0x485387b4
+}
+  pRti_FPGACL1FPGA_INTP0Ch0_Prio
+  {
+   type:  int(32)*
+   alias: "priority"
+   flags: READONLY
+		 addr:    0x485387b8
+		}
+  endgroup
+
+
+endgroup
+
+
+-- ******** Model variables ***************************************************
+
+group "Model Root"
+	group "offset_i1" -- block-group
+	{
+	 block: "Constant"
+	}
+		-- Skipping output Out1
+		trcref0_offset_i1
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "offset_i1"
+		 alias:    "offset_i1"
+		}
+		trcref0_Value
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "offset_i1"
+		 alias:    "Value"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "offset_i1"
+
+	group "offset_v1" -- block-group
+	{
+	 block: "Constant"
+	}
+		-- Skipping output Out1
+		trcref0_offset_v1
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "offset_v1"
+		 alias:    "offset_v1"
+		}
+		trcref0_Value
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "offset_v1"
+		 alias:    "Value"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "offset_v1"
+
+	group "offset_v3" -- block-group
+	{
+	 block: "Constant"
+	}
+		-- Skipping output Out1
+		trcref0_offset_v3
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "offset_v3"
+		 alias:    "offset_v3"
+}
+		trcref0_Value
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "offset_v3"
+		 alias:    "Value"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "offset_v3"
+
+	group "offset_v4" -- block-group
+	{
+	 block: "Constant"
+	}
+		-- Skipping output Out1
+		trcref0_offset_v4
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "offset_v4"
+		 alias:    "offset_v4"
+}
+		trcref0_Value
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "offset_v4"
+		 alias:    "Value"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "offset_v4"
+
+	group "fixedgain_i1" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_PVmppt_real_T_0[6]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+		trcref0_fixedgain_i1
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "fixedgain_i1"
+		 alias:    "fixedgain_i1"
+}
+		trcref0_Gain
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "fixedgain_i1"
+		 alias:    "Gain"
+		 flags:    DEPRECATED|HIDDEN
+}
+
+
+	endgroup -- block-group "fixedgain_i1"
+
+	group "fixedgain_v1" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_PVmppt_real_T_0[1]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+		trcref0_fixedgain_v1
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "fixedgain_v1"
+		 alias:    "fixedgain_v1"
+		}
+		trcref0_Gain
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "fixedgain_v1"
+		 alias:    "Gain"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "fixedgain_v1"
+
+	group "fixedgain_v3" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_PVmppt_real_T_0[11]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+		trcref0_fixedgain_v3
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "fixedgain_v3"
+		 alias:    "fixedgain_v3"
+}
+		trcref0_Gain
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "fixedgain_v3"
+		 alias:    "Gain"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "fixedgain_v3"
+
+	group "fixedgain_v4" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_PVmppt_real_T_0[15]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+		trcref0_fixedgain_v4
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "fixedgain_v4"
+		 alias:    "fixedgain_v4"
+}
+		trcref0_Gain
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "fixedgain_v4"
+		 alias:    "Gain"
+		 flags:    DEPRECATED|HIDDEN
+}
+
+
+	endgroup -- block-group "fixedgain_v4"
+
+	group "gain_i1" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_PVmppt_real_T_0[8]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+		trcref0_gain_i1
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "gain_i1"
+		 alias:    "gain_i1"
+		}
+		trcref0_Gain
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "gain_i1"
+		 alias:    "Gain"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "gain_i1"
+
+	group "gain_v1" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_PVmppt_real_T_0[3]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+		trcref0_gain_v1
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "gain_v1"
+		 alias:    "gain_v1"
+}
+		trcref0_Gain
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "gain_v1"
+		 alias:    "Gain"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "gain_v1"
+
+	group "gain_v3" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_PVmppt_real_T_0[13]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+		trcref0_gain_v3
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "gain_v3"
+		 alias:    "gain_v3"
+		}
+		trcref0_Gain
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "gain_v3"
+		 alias:    "Gain"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "gain_v3"
+
+	group "gain_v4" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_PVmppt_real_T_0[17]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+		trcref0_gain_v4
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "gain_v4"
+		 alias:    "gain_v4"
+		}
+		trcref0_Gain
+		{
+		 refgroup: "/Tunable Parameters"
+		 refvar:   "gain_v4"
+		 alias:    "Gain"
+		 flags:    DEPRECATED|HIDDEN
+		}
+
+
+	endgroup -- block-group "gain_v4"
+
+	group "Rate Transition" -- block-group
+	{
+	 block: "RateTransition"
+	}
+		p_0_PVmppt_real_T_0[20]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+		p_1_PVmppt_real_T_0[16]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "InitialCondition"
+		 flags:   PARAM
+		 addr:    0x48538744
+		}
+
+
+	endgroup -- block-group "Rate Transition"
+
+	group "Rate Transition1" -- block-group
+	{
+	 block: "RateTransition"
+	}
+		p_0_PVmppt_real_T_0[4]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+		p_1_PVmppt_real_T_0[13]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "InitialCondition"
+		 flags:   PARAM
+		 addr:    0x48538744
+		}
+
+
+	endgroup -- block-group "Rate Transition1"
+
+	group "Rate Transition2" -- block-group
+	{
+	 block: "RateTransition"
+	}
+		p_0_PVmppt_real_T_0[9]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+		p_1_PVmppt_real_T_0[14]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "InitialCondition"
+		 flags:   PARAM
+		 addr:    0x48538744
+		}
+
+
+	endgroup -- block-group "Rate Transition2"
+
+	group "Rate Transition3" -- block-group
+	{
+	 block: "RateTransition"
+	}
+		p_0_PVmppt_real_T_0[19]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+		p_1_PVmppt_real_T_0[15]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "InitialCondition"
+		 flags:   PARAM
+		 addr:    0x48538744
+		}
+
+
+	endgroup -- block-group "Rate Transition3"
+
+	group "Sum" -- block-group
+	{
+	 block: "Sum"
+	}
+		p_0_PVmppt_real_T_0[12]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+
+
+	endgroup -- block-group "Sum"
+
+	group "Sum1" -- block-group
+	{
+	 block: "Sum"
+	}
+		p_0_PVmppt_real_T_0[2]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+
+
+	endgroup -- block-group "Sum1"
+
+	group "Sum2" -- block-group
+	{
+	 block: "Sum"
+	}
+		p_0_PVmppt_real_T_0[7]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+
+
+	endgroup -- block-group "Sum2"
+
+	group "Sum3" -- block-group
+	{
+	 block: "Sum"
+	}
+		p_0_PVmppt_real_T_0[16]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+
+
+	endgroup -- block-group "Sum3"
+
+	group "Sum4" -- block-group
+	{
+	 block: "Sum"
+	}
+		p_0_PVmppt_real_T_0[18]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+
+
+	endgroup -- block-group "Sum4"
+
+  
+  
+	group "ADC_CLASS1_BL1" -- subsystem-group
+
+		p_0_PVmppt_real_T_0[0]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "ADC"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+
+	endgroup -- subsystem-group "ADC_CLASS1_BL1"
+  
+  
+	group "ADC_CLASS1_BL2" -- subsystem-group
+
+		p_0_PVmppt_real_T_0[5]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "ADC"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+
+	endgroup -- subsystem-group "ADC_CLASS1_BL2"
+  
+  
+	group "ADC_CLASS1_BL3" -- subsystem-group
+
+		p_0_PVmppt_real_T_0[10]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "ADC"
+		 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+
+	endgroup -- subsystem-group "ADC_CLASS1_BL3"
+  
+  
+	group "ADC_CLASS1_BL4" -- subsystem-group
+
+		p_0_PVmppt_real_T_0[14]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "ADC"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+
+	endgroup -- subsystem-group "ADC_CLASS1_BL4"
+  
+  
+	group "MPPT_system" -- subsystem-group
+
+		p_0_PVmppt_real_T_0[22]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "d"
+		 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+
+
+  
+  
+		group "MATLAB Function" -- subsystem-group
+
+			p_0_PVmppt_real_T_0[21]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "v_PandO"
+			 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+			p_0_PVmppt_real_T_0[22]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "d"
+			 flags:   OUTPUT|READONLY
+ addr:    0x48538740
+}
+			p_0_PVmppt_real_T_0[23]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "P"
+			 flags:   OUTPUT|READONLY
+		 addr:    0x48538740
+		}
+
+
+
+
+		endgroup -- subsystem-group "MATLAB Function"
+
+
+	endgroup -- subsystem-group "MPPT_system"
+  
+  
+	group "PROC_INT_BL1" -- subsystem-group
+
+		-- Skipping output Interrupt
+
+
+  
+  
+		group "Common Hardware\nInterrupt Interface" -- subsystem-group
+
+			-- Skipping output  
+
+		endgroup -- subsystem-group "Common Hardware\nInterrupt Interface"
+
+
+	endgroup -- subsystem-group "PROC_INT_BL1"
+  
+  
+	group "PROC_SETUP_BL1" -- subsystem-group
+
+
+	endgroup -- subsystem-group "PROC_SETUP_BL1"
+  
+  
+	group "PROC_XDATA_WRITE_BL1" -- subsystem-group
+
+
+	endgroup -- subsystem-group "PROC_XDATA_WRITE_BL1"
+  
+  
+	group "RTI Data" -- subsystem-group
+
+
+	endgroup -- subsystem-group "RTI Data"
+
+
+
+endgroup -- "Model Root"
+-- ******** Tunable Parameters ************************************************
+
+group "Tunable Parameters"
+
+	p_1_PVmppt_real_T_0[0]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "fixedgain_i1"
+	 flags:   PARAM
+ addr:    0x48538744
+}
+	p_1_PVmppt_real_T_0[1]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "fixedgain_v1"
+	 flags:   PARAM
+	 addr:    0x48538744
+	}
+	p_1_PVmppt_real_T_0[2]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "fixedgain_v3"
+	 flags:   PARAM
+ addr:    0x48538744
+}
+	p_1_PVmppt_real_T_0[3]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "fixedgain_v4"
+	 flags:   PARAM
+	 addr:    0x48538744
+	}
+	p_1_PVmppt_real_T_0[4]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "gain_i1"
+	 flags:   PARAM
+ addr:    0x48538744
+}
+	p_1_PVmppt_real_T_0[5]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "gain_v1"
+	 flags:   PARAM
+ addr:    0x48538744
+}
+	p_1_PVmppt_real_T_0[6]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "gain_v3"
+	 flags:   PARAM
+ addr:    0x48538744
+}
+	p_1_PVmppt_real_T_0[7]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "gain_v4"
+	 flags:   PARAM
+ addr:    0x48538744
+}
+	p_1_PVmppt_real_T_0[8]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "offset_i1"
+	 flags:   PARAM
+ addr:    0x48538744
+}
+	p_1_PVmppt_real_T_0[9]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "offset_v1"
+	 flags:   PARAM
+ addr:    0x48538744
+}
+	p_1_PVmppt_real_T_0[10]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "offset_v3"
+	 flags:   PARAM
+	 addr:    0x48538744
+	}
+	p_1_PVmppt_real_T_0[11]
+	{
+	 type:    flt(64,IEEE)*
+	 alias:   "offset_v4"
+	 flags:   PARAM
+	 addr:    0x48538744
+	}
+
+endgroup
+
+-- ******** State Machine Data ************************************************
+
+group "State Machine Data"
+
+
+endgroup
+
+
+-- ******** Labels ************************************************************
+
+-- Generation of labels turned off with TRCGenerateLabels option.
+
+-- ******** RTT Dynamic Variables *********************************************
+
+group "RTT Dynamic Variables"
+
+endgroup
+
+-- ******** User variables from model_usr.trc *********************************
+
+-- RTI_USR_TRC_BEGIN
+
+-- No user file PVmppt_usr.trc found.
+
+-- RTI_USR_TRC_END
+
+-- ******** EESPort States Variables ******************************************
+group "XIL API"
+{ 
+  
+}
+
+  group "EESPort"
+  {  
+    
+  }
+
+    p_xilapi_eesport_activeerrorset_uint32_T
+    {
+      type:    uint(32)*
+      alias:   "Active ErrorSet"
+      desc:    "Index of active ErrorSet or 0 if no ErrorSet is active."
+      flags:   OUTPUT|READONLY
+      range:   < 0 ; 4294967295 >
+	 addr:    0x485381c4
+	}
+
+    p_xilapi_eesport_erroractivated_uint32_T
+    {
+      type:    uint(32)*
+      alias:   "Error Activated"
+      desc:    "0 - no error is activated on hardware, 1 - at least one error is activated on hardware."  
+      flags:   OUTPUT|READONLY
+      range:   < 0 ; 1 >
+	 addr:    0x485381c0
+	}
+
+    p_xilapi_eesport_errorswitching_uint32_T
+    {
+      type:    uint(32)*
+      alias:   "Error Switching"
+      desc:    "0 - no switching operation running on hardware, 1 -  switching operation running on hardware."
+      flags:   OUTPUT|READONLY
+      range:   < 0 ; 1 >
+ addr:    0x485381bc
+}
+
+    xilapi_eesport_flags_uint32_T
+    {
+      type:    uint(32)
+      alias:   "Flags"
+      flags:   OUTPUT|READONLY
+      range:   < 0 ; 4294967295 >
+ addr:    0x485387d0
+}
+
+    xilapi_eesport_trigger_uint32_T
+    {
+      type:    uint(32)
+      alias:   "Trigger"
+      flags:   OUTPUT|READONLY
+      range:   < 0 ; 4294967295 >
+	 addr:    0x485387cc
+	}
+
+    endgroup -- "EESPort"
+
+endgroup -- "XILAPI"
+
+
+
+-- ******** [EOF] *************************************************************
+
