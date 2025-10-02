@@ -43,7 +43,7 @@ module hb_inv(
 		end
 	
 	//generador de interrupcion
-	reg [13:0] counter_int = 0; //cuenta 40 ciclos * 6us = 240us
+	reg [13:0] counter_int = 0; //cuenta 10 ciclos * 6us = 60us
 	always@(posedge clock_6us)
 		begin
 			counter_int = counter_int + 1;
